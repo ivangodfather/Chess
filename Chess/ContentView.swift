@@ -10,7 +10,6 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var viewModel = GameViewModel()
-    
     var body: some View {
         VStack(spacing: 0) {
             ForEach((0...7).reversed(), id: \.self) { y in
