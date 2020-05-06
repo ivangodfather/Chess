@@ -10,7 +10,7 @@ import Foundation
 
 
 class GameViewModel: ObservableObject {
-    var pieces = [[Piece?]](repeating: [Piece?](repeating: nil, count:  8), count: 8)
+    @Published var pieces = [[Piece?]](repeating: [Piece?](repeating: nil, count:  8), count: 8)
     
     init() {
         pieces[0][0] = Rook(x: 0, y: 0, player: .white)

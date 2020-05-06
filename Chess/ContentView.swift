@@ -20,14 +20,36 @@ struct ContentView: View {
                                 .resizable()
                             if self.viewModel.pieces[x][y] != nil {
                                 Image(uiImage: UIImage(named: self.viewModel.pieces[x][y]!.imageName)!)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .offset(self.viewModel.pieces[x][y]!.currentPosition)
                             }
                         }
+                        .gesture(self.dragGesture(x, y))
                     }
                 }
             }
-        }.frame(maxHeight: UIScreen.main.bounds.width)
+        }
+        .frame(maxHeight: UIScreen.main.bounds.width)
+    }
+    
+    private func dragGesture(_ x: Int,_ y: Int) -> _EndedGesture<_ChangedGesture<DragGesture>> {
+        DragGesture()
+            .onChanged { dragValue in
+                if self.viewModel.pieces[x][y] != nil {
+                    self.viewModel.pieces[x][y]!.currentPosition = CGSize(
+                        width: self.viewModel.pieces[x][y]!.newPosition.width + dragValue.translation.width,
+                        height: self.viewModel.pieces[x][y]!.newPosition.height + dragValue.translation.height
+                    )
+                    self.viewModel.objectWillChange.send()
+                }
+        }
+        .onEnded { dragValue in
+            if self.viewModel.pieces[x][y] != nil {
+                self.viewModel.pieces[x][y]!.newPosition = self.viewModel.pieces[x][y]!.currentPosition
+                self.viewModel.objectWillChange.send()
+            }
+        }
     }
 }
 

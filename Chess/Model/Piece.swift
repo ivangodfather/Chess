@@ -7,10 +7,13 @@
 //
 
 import Foundation
+import UIKit
 
 class Piece {
     var x, y: Int
     let imageName: String
+    var currentPosition = CGSize.zero
+    var newPosition = CGSize.zero
     
     init(x: Int, y: Int, imageName: String) {
         self.x = x
