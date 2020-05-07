@@ -57,6 +57,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4238537C2464531C006CD15E /* Piece */ = {
+			isa = PBXGroup;
+			children = (
+				42EE9BFA2462AB6600BB9AF4 /* Piece.swift */,
+				42EE9BFC2462AC3500BB9AF4 /* Bishop.swift */,
+				42EE9C002462AD8600BB9AF4 /* Rook.swift */,
+				42EE9C022462AD8E00BB9AF4 /* King.swift */,
+				42EE9C042462AD9A00BB9AF4 /* Queen.swift */,
+				42EE9C062462ADA100BB9AF4 /* Pawn.swift */,
+				42EE9C082462ADAF00BB9AF4 /* Knight.swift */,
+			);
+			path = Piece;
+			sourceTree = "<group>";
+		};
 		42EE9BD62462A80600BB9AF4 = {
 			isa = PBXGroup;
 			children = (
@@ -101,14 +115,8 @@
 		42EE9BF92462AB5A00BB9AF4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				42EE9BFA2462AB6600BB9AF4 /* Piece.swift */,
-				42EE9BFC2462AC3500BB9AF4 /* Bishop.swift */,
-				42EE9C002462AD8600BB9AF4 /* Rook.swift */,
-				42EE9C022462AD8E00BB9AF4 /* King.swift */,
-				42EE9C042462AD9A00BB9AF4 /* Queen.swift */,
-				42EE9C062462ADA100BB9AF4 /* Pawn.swift */,
-				42EE9C082462ADAF00BB9AF4 /* Knight.swift */,
 				42EE9BFE2462AD6400BB9AF4 /* Player.swift */,
+				4238537C2464531C006CD15E /* Piece */,
 			);
 			path = Model;
 			sourceTree = "<group>";

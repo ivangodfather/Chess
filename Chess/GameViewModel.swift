@@ -7,54 +7,58 @@
 //
 
 import Foundation
+import UIKit
 
 class GameViewModel: ObservableObject {
-    @Published var pieces = [[Piece?]](repeating: [Piece?](repeating: nil, count:  8), count: 8)
+    @Published var board = [[Piece?]](repeating: [Piece?](repeating: nil, count:  8), count: 8)
+    var pieces: [Piece] { board.flatMap { $0 }.compactMap { $0 } }
     
     init() {
-        pieces[0][0] = Rook(x: 0, y: 0, player: .white)
-        pieces[1][0] = Knight(x: 1, y: 0, player: .white)
-        pieces[2][0] = Bishop(x: 2, y: 0, player: .white)
-        pieces[3][0] = Queen(x: 3, y: 0, player: .white)
-        pieces[4][0] = King(x: 4, y: 0, player: .white)
-        pieces[5][0] = Bishop(x: 5, y: 0, player: .white)
-        pieces[6][0] = Knight(x: 6, y: 0, player: .white)
-        pieces[7][0] = Rook(x: 0, y: 0, player: .white)
-        pieces[0][1] = Pawn(x: 1, y: 0, player: .white)
-        pieces[1][1] = Pawn(x: 1, y: 0, player: .white)
-        pieces[2][1] = Pawn(x: 2, y: 0, player: .white)
-        pieces[3][1] = Pawn(x: 3, y: 0, player: .white)
-        pieces[4][1] = Pawn(x: 4, y: 0, player: .white)
-        pieces[5][1] = Pawn(x: 5, y: 0, player: .white)
-        pieces[6][1] = Pawn(x: 6, y: 0, player: .white)
-        pieces[7][1] = Pawn(x: 7, y: 0, player: .white)
-        pieces[0][7] = Rook(x: 0, y: 0, player: .black)
-        pieces[1][7] = Knight(x: 1, y: 0, player: .black)
-        pieces[2][7] = Bishop(x: 2, y: 0, player: .black)
-        pieces[3][7] = Queen(x: 3, y: 0, player: .black)
-        pieces[4][7] = King(x: 4, y: 0, player: .black)
-        pieces[5][7] = Bishop(x: 5, y: 0, player: .black)
-        pieces[6][7] = Knight(x: 6, y: 0, player: .black)
-        pieces[7][7] = Rook(x: 7, y: 0, player: .black)
-        pieces[0][6] = Pawn(x: 0, y: 0, player: .black)
-        pieces[1][6] = Pawn(x: 1, y: 0, player: .black)
-        pieces[2][6] = Pawn(x: 2, y: 0, player: .black)
-        pieces[3][6] = Pawn(x: 3, y: 0, player: .black)
-        pieces[4][6] = Pawn(x: 4, y: 0, player: .black)
-        pieces[5][6] = Pawn(x: 5, y: 0, player: .black)
-        pieces[6][6] = Pawn(x: 6, y: 0, player: .black)
-        pieces[7][6] = Pawn(x: 7, y: 0, player: .black)
+        board[0][0] = Rook(x: 0, y: 0, player: .white)
+        board[1][0] = Knight(x: 1, y: 0, player: .white)
+        board[2][0] = Bishop(x: 2, y: 0, player: .white)
+        board[3][0] = Queen(x: 3, y: 0, player: .white)
+        board[4][0] = King(x: 4, y: 0, player: .white)
+        board[5][0] = Bishop(x: 5, y: 0, player: .white)
+        board[6][0] = Knight(x: 6, y: 0, player: .white)
+        board[7][0] = Rook(x: 7, y: 0, player: .white)
+        board[0][1] = Pawn(x: 0, y: 1, player: .white)
+        board[1][1] = Pawn(x: 1, y: 1, player: .white)
+        board[2][1] = Pawn(x: 2, y: 1, player: .white)
+        board[3][1] = Pawn(x: 3, y: 1, player: .white)
+        board[4][1] = Pawn(x: 4, y: 1, player: .white)
+        board[5][1] = Pawn(x: 5, y: 1, player: .white)
+        board[6][1] = Pawn(x: 6, y: 1, player: .white)
+        board[7][1] = Pawn(x: 7, y: 1, player: .white)
+        board[0][7] = Rook(x: 0, y: 7, player: .black)
+        board[1][7] = Knight(x: 1, y: 7, player: .black)
+        board[2][7] = Bishop(x: 2, y: 7, player: .black)
+        board[3][7] = Queen(x: 3, y: 7, player: .black)
+        board[4][7] = King(x: 4, y: 7, player: .black)
+        board[5][7] = Bishop(x: 5, y: 7, player: .black)
+        board[6][7] = Knight(x: 6, y: 7, player: .black)
+        board[7][7] = Rook(x: 7, y: 7, player: .black)
+        board[0][6] = Pawn(x: 0, y: 6, player: .black)
+        board[1][6] = Pawn(x: 1, y: 6, player: .black)
+        board[2][6] = Pawn(x: 2, y: 6, player: .black)
+        board[3][6] = Pawn(x: 3, y: 6, player: .black)
+        board[4][6] = Pawn(x: 4, y: 6, player: .black)
+        board[5][6] = Pawn(x: 5, y: 6, player: .black)
+        board[6][6] = Pawn(x: 6, y: 6, player: .black)
+        board[7][6] = Pawn(x: 7, y: 6, player: .black)
+
+        pieces.forEach { piece in
+            piece.currentPosition = CGSize(width: CGFloat(piece.x) * UIScreen.main.bounds.width / 8, height: -CGFloat(piece.y) * UIScreen.main.bounds.width / 8)
+            piece.newPosition = piece.currentPosition
+        }
     }
     
     
-    func didMove(x: Int, y: Int, xOffset: Int, yOffset: Int) {
-        let newX = x + xOffset
-        let newY = y - yOffset
-        let piece = pieces[x][y]
-        piece?.currentPosition = .zero
-        piece?.newPosition = .zero
-        pieces[newX][newY] = piece
-        pieces[x][y] = nil
+    func didMove(_ piece: Piece, offset: Piece.Position) {
+        piece.x += offset.x
+        piece.y -= offset.y
+        piece.currentPosition = CGSize(width: CGFloat(piece.x) * UIScreen.main.bounds.width / 8, height: -CGFloat(piece.y) * UIScreen.main.bounds.width / 8)
+        piece.newPosition = piece.currentPosition
         objectWillChange.send()
     }
 }

@@ -9,7 +9,8 @@
 import Foundation
 import UIKit
 
-class Piece {
+class Piece: Identifiable {
+    var id = UUID()
     var x, y: Int
     let imageName: String
     var currentPosition = CGSize.zero
@@ -19,5 +20,9 @@ class Piece {
         self.x = x
         self.y = y
         self.imageName = imageName
+    }
+
+    struct Position {
+        let x, y: Int
     }
 }
