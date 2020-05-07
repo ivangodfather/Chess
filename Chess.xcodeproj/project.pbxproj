@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42385384246455D0006CD15E /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42385383246455D0006CD15E /* Position.swift */; };
 		42EE9BE32462A80600BB9AF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EE9BE22462A80600BB9AF4 /* AppDelegate.swift */; };
 		42EE9BE52462A80600BB9AF4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EE9BE42462A80600BB9AF4 /* SceneDelegate.swift */; };
 		42EE9BE82462A80700BB9AF4 /* Chess.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 42EE9BE62462A80700BB9AF4 /* Chess.xcdatamodeld */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		42385383246455D0006CD15E /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		42EE9BDF2462A80600BB9AF4 /* Chess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42EE9BE22462A80600BB9AF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42EE9BE42462A80600BB9AF4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +73,13 @@
 			path = Piece;
 			sourceTree = "<group>";
 		};
+		4238538224645571006CD15E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		42EE9BD62462A80600BB9AF4 = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +99,7 @@
 		42EE9BE12462A80600BB9AF4 /* Chess */ = {
 			isa = PBXGroup;
 			children = (
+				4238538224645571006CD15E /* Extensions */,
 				42EE9BF92462AB5A00BB9AF4 /* Model */,
 				42EE9BE22462A80600BB9AF4 /* AppDelegate.swift */,
 				42EE9BE42462A80600BB9AF4 /* SceneDelegate.swift */,
@@ -117,6 +127,7 @@
 			children = (
 				42EE9BFE2462AD6400BB9AF4 /* Player.swift */,
 				4238537C2464531C006CD15E /* Piece */,
+				42385383246455D0006CD15E /* Position.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -192,6 +203,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42385384246455D0006CD15E /* Position.swift in Sources */,
 				42EE9C012462AD8600BB9AF4 /* Rook.swift in Sources */,
 				42EE9BE32462A80600BB9AF4 /* AppDelegate.swift in Sources */,
 				42EE9C032462AD8E00BB9AF4 /* King.swift in Sources */,

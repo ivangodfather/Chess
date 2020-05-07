@@ -44,12 +44,8 @@ struct ContentView: View {
                     )
                     self.viewModel.objectWillChange.send()
         }
-        .onEnded { self.viewModel.didMove(piece, offset: self.pieceOffset($0.translation))
+        .onEnded { self.viewModel.didMove(piece, offset: Position($0.translation))
         }
-    }
-
-    private func pieceOffset(_ translation: CGSize) -> Piece.Position {
-        Piece.Position(x: Int((translation.width / (UIScreen.main.bounds.width / 8)).rounded()), y: Int((translation.height / (UIScreen.main.bounds.width / 8)).rounded()))
     }
 }
 

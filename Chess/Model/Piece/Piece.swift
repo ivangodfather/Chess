@@ -21,8 +21,4 @@ class Piece: Identifiable {
         self.y = y
         self.imageName = imageName
     }
-
-    struct Position {
-        let x, y: Int
-    }
 }

@@ -54,7 +54,7 @@ class GameViewModel: ObservableObject {
     }
     
     
-    func didMove(_ piece: Piece, offset: Piece.Position) {
+    func didMove(_ piece: Piece, offset: Position) {
         piece.x += offset.x
         piece.y -= offset.y
         piece.currentPosition = CGSize(width: CGFloat(piece.x) * UIScreen.main.bounds.width / 8, height: -CGFloat(piece.y) * UIScreen.main.bounds.width / 8)
