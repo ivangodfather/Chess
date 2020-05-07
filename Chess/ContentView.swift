@@ -38,14 +38,10 @@ struct ContentView: View {
     private func dragGesture(_ piece: Piece) -> _EndedGesture<_ChangedGesture<DragGesture>> {
         DragGesture()
             .onChanged { dragValue in
-                    piece.currentPosition = CGSize(
-                        width: piece.newPosition.width + dragValue.translation.width,
-                        height: piece.newPosition.height + dragValue.translation.height
-                    )
-                    self.viewModel.objectWillChange.send()
+                piece.currentPosition = piece.position.size + dragValue.translation
+                self.viewModel.objectWillChange.send()
         }
-        .onEnded { self.viewModel.didMove(piece, offset: Position($0.translation))
-        }
+        .onEnded { self.viewModel.didMove(piece, offset: Position($0.translation)) }
     }
 }
 

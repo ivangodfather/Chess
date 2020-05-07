@@ -11,14 +11,13 @@ import UIKit
 
 class Piece: Identifiable {
     var id = UUID()
-    var x, y: Int
+    var position: Position
     let imageName: String
     var currentPosition = CGSize.zero
-    var newPosition = CGSize.zero
-    
+
     init(x: Int, y: Int, imageName: String) {
-        self.x = x
-        self.y = y
+        self.position = Position(x: x, y: y)
         self.imageName = imageName
+        currentPosition = Position(x: x, y: y).size
     }
 }
