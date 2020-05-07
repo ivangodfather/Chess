@@ -10,10 +10,21 @@ import Foundation
 import UIKit
 
 class GameViewModel: ObservableObject {
+
     @Published var board = [[Piece?]](repeating: [Piece?](repeating: nil, count:  8), count: 8)
     var pieces: [Piece] { board.flatMap { $0 }.compactMap { $0 } }
 
     init() {
+        loadBoardPieces()
+    }
+    
+    
+    func didMove(_ piece: Piece, offset: Position) {
+        piece.position = piece.position + offset
+        objectWillChange.send()
+    }
+
+    private func loadBoardPieces() {
         board[0][0] = Rook(x: 0, y: 0, player: .white)
         board[1][0] = Knight(x: 1, y: 0, player: .white)
         board[2][0] = Bishop(x: 2, y: 0, player: .white)
@@ -46,12 +57,5 @@ class GameViewModel: ObservableObject {
         board[5][6] = Pawn(x: 5, y: 6, player: .black)
         board[6][6] = Pawn(x: 6, y: 6, player: .black)
         board[7][6] = Pawn(x: 7, y: 6, player: .black)
-    }
-    
-    
-    func didMove(_ piece: Piece, offset: Position) {
-        piece.position = piece.position + offset
-        piece.currentPosition = piece.position.size
-        objectWillChange.send()
     }
 }

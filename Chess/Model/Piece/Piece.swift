@@ -11,7 +11,9 @@ import UIKit
 
 class Piece: Identifiable {
     var id = UUID()
-    var position: Position
+    var position: Position {
+        didSet { currentPosition = position.size }
+    }
     let imageName: String
     var currentPosition = CGSize.zero
 
