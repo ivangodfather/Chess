@@ -11,21 +11,28 @@ import SwiftUI
 struct ContentView: View {
     @ObservedObject var viewModel = GameViewModel()
     var body: some View {
-        VStack(spacing: 0) {
-            ForEach((0...7).reversed(), id: \.self) { y in
-                HStack(spacing: 0) {
-                    ForEach(0...7, id: \.self) { x in
-                        ZStack {
+        ZStack {
+            VStack(spacing: 0) {
+                ForEach((0...7).reversed(), id: \.self) { y in
+                    HStack(spacing: 0) {
+                        ForEach(0...7, id: \.self) { x in
                             ((x + y) %  2 == 1 ? Image("b_white") : Image("b_black"))
                                 .resizable()
-                            if self.viewModel.pieces[x][y] != nil {
-                                Image(uiImage: UIImage(named: self.viewModel.pieces[x][y]!.imageName)!)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .offset(self.viewModel.pieces[x][y]!.currentPosition)
-                            }
                         }
-                        .gesture(self.dragGesture(x, y))
+                    }
+                }
+            }
+            VStack(spacing: 0) {
+                ForEach((0...7).reversed(), id: \.self) { y in
+                    HStack(spacing: 0) {
+                        ForEach(0...7, id: \.self) { x in
+                           (self.viewModel.pieces[x][y] != nil ?
+                            Image(uiImage: UIImage(named: self.viewModel.pieces[x][y]!.imageName)!)
+                                    : Image(""))
+                            .resizable()
+                            .offset(self.viewModel.pieces[x][y] != nil ? self.viewModel.pieces[x][y]!.currentPosition : .zero)
+                            .gesture(self.dragGesture(x, y))
+                        }
                     }
                 }
             }
@@ -45,10 +52,10 @@ struct ContentView: View {
                 }
         }
         .onEnded { dragValue in
-            if self.viewModel.pieces[x][y] != nil {
-                self.viewModel.pieces[x][y]!.newPosition = self.viewModel.pieces[x][y]!.currentPosition
-                self.viewModel.objectWillChange.send()
-            }
+            self.viewModel.didMove(x: x, y: y,
+                                   xOffset: Int((dragValue.translation.width / (UIScreen.main.bounds.width / 8)).rounded()),
+                                   yOffset: Int((dragValue.translation.height / (UIScreen.main.bounds.width / 8)).rounded())
+            )
         }
     }
 }

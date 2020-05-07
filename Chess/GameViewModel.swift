@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 class GameViewModel: ObservableObject {
     @Published var pieces = [[Piece?]](repeating: [Piece?](repeating: nil, count:  8), count: 8)
     
@@ -45,5 +44,17 @@ class GameViewModel: ObservableObject {
         pieces[5][6] = Pawn(x: 5, y: 0, player: .black)
         pieces[6][6] = Pawn(x: 6, y: 0, player: .black)
         pieces[7][6] = Pawn(x: 7, y: 0, player: .black)
+    }
+    
+    
+    func didMove(x: Int, y: Int, xOffset: Int, yOffset: Int) {
+        let newX = x + xOffset
+        let newY = y - yOffset
+        let piece = pieces[x][y]
+        piece?.currentPosition = .zero
+        piece?.newPosition = .zero
+        pieces[newX][newY] = piece
+        pieces[x][y] = nil
+        objectWillChange.send()
     }
 }
