@@ -10,8 +10,8 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @ObservedObject var viewModel = GameViewModel()
-    @State var currentPiece: (Piece?, CGSize) = (nil, .zero)
+    @ObservedObject private var viewModel = GameViewModel()
+    @State private var currentPiece: (Piece?, CGSize) = (nil, .zero)
 
     var body: some View {
         ZStack(alignment: .bottomLeading) {
