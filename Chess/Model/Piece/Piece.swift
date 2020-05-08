@@ -12,12 +12,10 @@ import UIKit
 class Piece: Identifiable {
     let uuid = UUID()
 
-    var position: Position
     let imageName: String
     let player: Player
 
-    init(x: Int, y: Int, imageName: String, player: Player) {
-        self.position = Position(x: x, y: y)
+    init(imageName: String, player: Player) {
         self.imageName = imageName
         self.player = player
     }

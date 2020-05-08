@@ -25,12 +25,17 @@ struct ContentView: View {
                     }
                 }
             }
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    print(self.viewModel.positionForPiece(self.viewModel.board[5][1]!))
+                }
+            }
             ForEach(viewModel.pieces) { piece in
                 Image(piece.imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .scaleEffect(self.currentPiece.0 == piece ? 1.3 : 1)
-                    .offset(self.currentPiece.0 == piece ? self.currentPiece.1 : piece.position.size)
+                    .offset(self.currentPiece.0 == piece ? self.currentPiece.1 : self.viewModel.positionForPiece(piece).size)
                     .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)
                     .gesture(self.dragGesture(piece))
                     .animation(.easeInOut(duration: 0.2))
@@ -43,7 +48,7 @@ struct ContentView: View {
     private func dragGesture(_ piece: Piece) -> _EndedGesture<_ChangedGesture<DragGesture>> {
         DragGesture()
             .onChanged { dragValue in
-                self.currentPiece = (piece, piece.position.size + dragValue.translation)
+                self.currentPiece = (piece, self.viewModel.positionForPiece(piece).size + dragValue.translation)
                 self.viewModel.objectWillChange.send()
         }
         .onEnded {

@@ -95,14 +95,24 @@ struct GameEngine {
             return false
         }
         if abs(start.x - final.x) == 1 { return true }
-        let rangeX = (min(start.x, final.x) + 1...max(start.x, final.x) - 1).map { $0 }
-        let rangey = (min(start.y, final.y) + 1...max(start.y, final.y) - 1).map { $0 }
-        for i in 0..<rangeX.count {
-            if board[rangeX[i]][rangey[i]] != nil {
+        let squaresToCheck = abs(start.x - final.x) - 1
+        let rangeX: [Int]
+        if start.x < final.x {
+            rangeX = (start.x + 1...final.x - 1).map { $0 }
+        } else {
+            rangeX = (final.x + 1...start.x - 1).map { $0 }.reversed()
+        }
+        let rangeY: [Int]
+        if start.y < final.y {
+            rangeY = (start.y + 1...final.y - 1).map { $0 }
+        } else {
+            rangeY = (final.y + 1...start.y - 1).map { $0 }.reversed()
+        }
+        for x in 0..<squaresToCheck {
+            if board[rangeX[x]][rangeY[x]] != nil {
                 return false
             }
         }
-
         return true
     }
 }

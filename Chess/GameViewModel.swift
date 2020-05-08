@@ -24,15 +24,21 @@ final class GameViewModel: ObservableObject {
     
     
     func didMove(_ piece: Piece, offset: Position) {
-        if engine.isValidMove(board: board, start: piece.position, final: piece.position + offset, player: currentPlayer) {
-            let newPosition = piece.position + offset
+        if engine.isValidMove(board: board, start: positionForPiece(piece), final: positionForPiece(piece) + offset, player: currentPlayer) {
+            let oldPosition = positionForPiece(piece)
+            let newPosition = oldPosition + offset
             board[newPosition] = piece
-            board[piece.position] = nil
-            piece.position = newPosition
+            board[oldPosition] = nil
             currentPlayer = currentPlayer == .white ? .black : .white
 
         } 
         objectWillChange.send()
     }
 
+    func positionForPiece(_ piece: Piece) -> Position {
+        if let index = board.flatMap({ $0 }).firstIndex (where: { $0 == piece }) {
+            return Position(x: index / 8, y: index % 8)
+        }
+        fatalError()
+    }
 }

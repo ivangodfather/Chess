@@ -11,6 +11,6 @@ import Foundation
 class Bishop: Piece {
     
     init(x: Int, y: Int, player: Player) {
-        super.init(x: x, y: y, imageName: "bishop_\(player == .white ? "w" : "b")", player: player)
+        super.init(imageName: "bishop_\(player == .white ? "w" : "b")", player: player)
     }
 }
