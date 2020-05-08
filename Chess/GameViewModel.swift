@@ -11,11 +11,11 @@ import UIKit
 
 final class GameViewModel: ObservableObject {
 
-    private let engine: GameEngine
-
     @Published var board: Board
     @Published var currentPlayer = Player.white
     var pieces: [Piece] { board.flatMap { $0 }.compactMap { $0 } }
+
+    private let engine: GameEngine
 
     init() {
         engine = GameEngine()
@@ -31,9 +31,7 @@ final class GameViewModel: ObservableObject {
             piece.position = newPosition
             currentPlayer = currentPlayer == .white ? .black : .white
 
-        } else {
-            piece.currentPosition = piece.position.size
-        }
+        } 
         objectWillChange.send()
     }
 

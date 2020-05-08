@@ -10,19 +10,21 @@ import Foundation
 import UIKit
 
 class Piece: Identifiable {
-    var currentPosition = CGSize.zero
+    let uuid = UUID()
 
-    var position: Position {
-        didSet { currentPosition = position.size }
-    }
+    var position: Position
     let imageName: String
     let player: Player
-
 
     init(x: Int, y: Int, imageName: String, player: Player) {
         self.position = Position(x: x, y: y)
         self.imageName = imageName
         self.player = player
-        currentPosition = Position(x: x, y: y).size
+    }
+}
+
+extension Piece: Equatable {
+    static func == (lhs: Piece, rhs: Piece) -> Bool {
+        lhs.uuid == rhs.uuid
     }
 }

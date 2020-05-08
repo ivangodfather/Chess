@@ -9,7 +9,10 @@
 import SwiftUI
 
 struct ContentView: View {
+
     @ObservedObject var viewModel = GameViewModel()
+    @State var currentPiece: (Piece?, CGSize) = (nil, .zero)
+
     var body: some View {
         ZStack(alignment: .bottomLeading) {
             VStack(spacing: 0) {
@@ -26,7 +29,8 @@ struct ContentView: View {
                 Image(piece.imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .offset(piece.currentPosition)
+                    .scaleEffect(self.currentPiece.0 == piece ? 1.3 : 1)
+                    .offset(self.currentPiece.0 == piece ? self.currentPiece.1 : piece.position.size)
                     .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)
                     .gesture(self.dragGesture(piece))
 
@@ -39,10 +43,13 @@ struct ContentView: View {
     private func dragGesture(_ piece: Piece) -> _EndedGesture<_ChangedGesture<DragGesture>> {
         DragGesture()
             .onChanged { dragValue in
-                piece.currentPosition = piece.position.size + dragValue.translation
+                self.currentPiece = (piece, piece.position.size + dragValue.translation)
                 self.viewModel.objectWillChange.send()
         }
-        .onEnded { self.viewModel.didMove(piece, offset: Position($0.translation)) }
+        .onEnded {
+            self.currentPiece = (nil, .zero)
+            self.viewModel.didMove(piece, offset: Position($0.translation))
+        }
     }
 }
 
