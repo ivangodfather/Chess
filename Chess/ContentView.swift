@@ -14,29 +14,43 @@ struct ContentView: View {
     @State private var currentPiece: (Piece?, CGSize) = (nil, .zero)
 
     var body: some View {
-        ZStack(alignment: .bottomLeading) {
+
+        ZStack {
+            Image("pattern")
+                .opacity(0.4)
+                .blur(radius: 1)
+                
+            
             VStack(spacing: 0) {
-                ForEach((0...7).reversed(), id: \.self) { y in
-                    HStack(spacing: 0) {
-                        ForEach(0...7, id: \.self) { x in
-                            ((x + y) %  2 == 1 ? Image("b_white") : Image("b_black"))
-                                .resizable()
+                HUDView(name: "Nakamura, Hikaru", time: "1:01.15")
+
+                ZStack(alignment: .bottomLeading) {
+                    VStack(spacing: 0) {
+                        ForEach((0...7).reversed(), id: \.self) { y in
+                            HStack(spacing: 0) {
+                                ForEach(0...7, id: \.self) { x in
+                                    ((x + y).isMultiple(of: 2) ? Image("b_black") : Image("b_white"))
+                                        .resizable()
+                                }
+                            }
                         }
                     }
+                    ForEach(viewModel.pieces) { piece in
+                        Image(piece.imageName)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .scaleEffect(self.currentPiece.0 == piece ? 1.3 : 1)
+                            .offset(self.currentPiece.0 == piece ? self.currentPiece.1 : self.viewModel.positionForPiece(piece).size)
+                            .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)
+                            .gesture(self.dragGesture(piece))
+                            .animation(.easeInOut(duration: 0.2))
+                    }
                 }
+                .frame(maxHeight: UIScreen.main.bounds.width)
+
+                HUDView(name: "Alicia Conde", time: "1:01.15")
             }
-            ForEach(viewModel.pieces) { piece in
-                Image(piece.imageName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .scaleEffect(self.currentPiece.0 == piece ? 1.3 : 1)
-                    .offset(self.currentPiece.0 == piece ? self.currentPiece.1 : self.viewModel.positionForPiece(piece).size)
-                    .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)
-                    .gesture(self.dragGesture(piece))
-                    .animation(.easeInOut(duration: 0.2))
-            }
-        }
-        .frame(maxHeight: UIScreen.main.bounds.width)
+        }.edgesIgnoringSafeArea(.top)
     }
     
     private func dragGesture(_ piece: Piece) -> _EndedGesture<_ChangedGesture<DragGesture>> {
