@@ -9,23 +9,23 @@
 import Foundation
 import Combine
 
+typealias Board  = [[Piece?]]
+
 class ChessGame {
 
-    var board: CurrentValueSubject<Board, Never>
-    var currentPlayer: CurrentValueSubject<Player, Never>
-    var whiteRemainingTime: CurrentValueSubject<TimeInterval, Never>
-    var blackRemainingTime: CurrentValueSubject<TimeInterval, Never>
-
-    var pieceMovement = PieceMovement()
+    let board: CurrentValueSubject<Board, Never> = CurrentValueSubject(ChessGame.loadInitialBoard())
+    let currentPlayer: CurrentValueSubject<Player, Never> = CurrentValueSubject(.white)
+    let currentPlayerIsInCheck: CurrentValueSubject<Bool, Never> = CurrentValueSubject(false)
+    let whiteRemainingTime: CurrentValueSubject<TimeInterval, Never>
+    let blackRemainingTime: CurrentValueSubject<TimeInterval, Never>
 
     var activePieces: [Piece] { board.value.flatMap { $0 }.compactMap { $0 } }
 
+    private let pieceMovement = PieceMovement()
 
     init(playerTime: TimeInterval = 10 * 60) {
-        currentPlayer = CurrentValueSubject(.white)
         whiteRemainingTime = CurrentValueSubject(playerTime)
         blackRemainingTime = CurrentValueSubject(playerTime)
-        board = CurrentValueSubject(ChessGame.loadInitialBoard())
     }
 
     func didMove(from startPosition: Position, to finalPosition: Position) {
@@ -33,6 +33,7 @@ class ChessGame {
             board.value[finalPosition] = board.value[startPosition]
             board.value[startPosition] = nil
             currentPlayer.send(currentPlayer.value == .white ? .black : .white)
+            checkCurretPlayerIsInCheck()
         }
     }
 
@@ -42,6 +43,19 @@ class ChessGame {
             return Position(x: index / 8, y: index % 8)
         }
         fatalError()
+    }
+
+    private func checkCurretPlayerIsInCheck() {
+        let otherPlayer = currentPlayer.value == .white ? Player.black : .white
+        let otherPlayerPieces = activePieces.filter { $0.player == otherPlayer }
+        if let king = activePieces.filter ({ $0.player == currentPlayer.value && $0.type == .king }).first {
+            for piece in otherPlayerPieces {
+                if pieceMovement.isValid(board: board.value, start: indexOf(piece), final: indexOf(king), player: otherPlayer) {
+                    currentPlayerIsInCheck.send(true)
+                    return
+                }
+            }
+        }
     }
 }
 

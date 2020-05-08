@@ -8,8 +8,6 @@
 
 import Foundation
 
-typealias Board  = [[Piece?]]
-
 struct PieceMovement {
 
     private let bounds = 0...7
