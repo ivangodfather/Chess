@@ -33,7 +33,7 @@ struct ContentView: View {
                     .offset(self.currentPiece.0 == piece ? self.currentPiece.1 : piece.position.size)
                     .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)
                     .gesture(self.dragGesture(piece))
-
+                    .animation(.easeInOut(duration: 0.2))
             }
         }
         .frame(maxHeight: UIScreen.main.bounds.width)
