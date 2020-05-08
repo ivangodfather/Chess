@@ -11,6 +11,6 @@ import Foundation
 class Pawn: Piece {
     
     init(x: Int, y: Int, player: Player) {
-        super.init(x: x, y: y, imageName: "pawn_\(player == .white ? "w" : "b")")
+        super.init(x: x, y: y, imageName: "pawn_\(player == .white ? "w" : "b")", player: player)
     }
 }

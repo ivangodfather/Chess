@@ -11,6 +11,6 @@ import Foundation
 class Queen: Piece {
     
     init(x: Int, y: Int, player: Player) {
-        super.init(x: x, y: y, imageName: "queen_\(player == .white ? "w" : "b")")
+        super.init(x: x, y: y, imageName: "queen_\(player == .white ? "w" : "b")", player: player)
     }
 }

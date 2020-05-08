@@ -30,3 +30,6 @@ struct Position {
 func +(lhs: Position, rhs: Position) -> Position {
     return Position(x: lhs.x + rhs.x, y: lhs.y - rhs.y)
 }
+
+extension Position: Equatable {
+}

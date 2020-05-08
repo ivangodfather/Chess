@@ -25,6 +25,7 @@ struct ContentView: View {
             ForEach(viewModel.pieces) { piece in
                 Image(piece.imageName)
                     .resizable()
+                    .aspectRatio(contentMode: .fit)
                     .offset(piece.currentPosition)
                     .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)
                     .gesture(self.dragGesture(piece))

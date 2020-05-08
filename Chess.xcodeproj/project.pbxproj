@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		42385384246455D0006CD15E /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42385383246455D0006CD15E /* Position.swift */; };
 		4238538624645BC1006CD15E /* CGSize+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4238538524645BC1006CD15E /* CGSize+.swift */; };
+		4238538824646D32006CD15E /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4238538724646D32006CD15E /* GameEngine.swift */; };
+		4238538A24646F09006CD15E /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4238538924646F09006CD15E /* Array+.swift */; };
+		4238538C246560BC006CD15E /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4238538B246560BC006CD15E /* Board.swift */; };
 		42EE9BE32462A80600BB9AF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EE9BE22462A80600BB9AF4 /* AppDelegate.swift */; };
 		42EE9BE52462A80600BB9AF4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EE9BE42462A80600BB9AF4 /* SceneDelegate.swift */; };
 		42EE9BE82462A80700BB9AF4 /* Chess.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 42EE9BE62462A80700BB9AF4 /* Chess.xcdatamodeld */; };
@@ -30,6 +33,9 @@
 /* Begin PBXFileReference section */
 		42385383246455D0006CD15E /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		4238538524645BC1006CD15E /* CGSize+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+.swift"; sourceTree = "<group>"; };
+		4238538724646D32006CD15E /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
+		4238538924646F09006CD15E /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
+		4238538B246560BC006CD15E /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		42EE9BDF2462A80600BB9AF4 /* Chess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42EE9BE22462A80600BB9AF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42EE9BE42462A80600BB9AF4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				4238538524645BC1006CD15E /* CGSize+.swift */,
+				4238538924646F09006CD15E /* Array+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -108,6 +115,7 @@
 				42EE9BE42462A80600BB9AF4 /* SceneDelegate.swift */,
 				42EE9BE92462A80700BB9AF4 /* ContentView.swift */,
 				42EE9C0A2462AE7D00BB9AF4 /* GameViewModel.swift */,
+				4238538724646D32006CD15E /* GameEngine.swift */,
 				42EE9BEB2462A80800BB9AF4 /* Assets.xcassets */,
 				42EE9BF02462A80800BB9AF4 /* LaunchScreen.storyboard */,
 				42EE9BF32462A80800BB9AF4 /* Info.plist */,
@@ -130,6 +138,7 @@
 			children = (
 				42EE9BFE2462AD6400BB9AF4 /* Player.swift */,
 				42385383246455D0006CD15E /* Position.swift */,
+				4238538B246560BC006CD15E /* Board.swift */,
 				4238537C2464531C006CD15E /* Piece */,
 			);
 			path = Model;
@@ -214,10 +223,13 @@
 				42EE9C092462ADAF00BB9AF4 /* Knight.swift in Sources */,
 				42EE9BFD2462AC3500BB9AF4 /* Bishop.swift in Sources */,
 				42EE9C0B2462AE7D00BB9AF4 /* GameViewModel.swift in Sources */,
+				4238538C246560BC006CD15E /* Board.swift in Sources */,
 				42EE9BFB2462AB6600BB9AF4 /* Piece.swift in Sources */,
 				42EE9C052462AD9A00BB9AF4 /* Queen.swift in Sources */,
 				42EE9BFF2462AD6400BB9AF4 /* Player.swift in Sources */,
+				4238538824646D32006CD15E /* GameEngine.swift in Sources */,
 				42EE9C072462ADA100BB9AF4 /* Pawn.swift in Sources */,
+				4238538A24646F09006CD15E /* Array+.swift in Sources */,
 				4238538624645BC1006CD15E /* CGSize+.swift in Sources */,
 				42EE9BEA2462A80700BB9AF4 /* ContentView.swift in Sources */,
 				42EE9BE52462A80600BB9AF4 /* SceneDelegate.swift in Sources */,
@@ -358,6 +370,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Chess/Preview Content\"";
+				DEVELOPMENT_TEAM = CPTD3EV4H4;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Chess/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -377,6 +390,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Chess/Preview Content\"";
+				DEVELOPMENT_TEAM = CPTD3EV4H4;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Chess/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
