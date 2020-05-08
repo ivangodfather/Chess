@@ -12,6 +12,7 @@ struct ContentView: View {
 
     @ObservedObject private var viewModel = GameViewModel()
     @State private var currentPiece: (Piece?, CGSize) = (nil, .zero)
+    @State var isRotatingWhite = true
 
     var body: some View {
 
@@ -22,7 +23,7 @@ struct ContentView: View {
 
             
             VStack(spacing: 0) {
-                HUDView(name: "Nakamura, Hikaru", time: "1:01.15")
+                HUDView(name: "Nakamura, Hikaru", time: viewModel.blackRemainigTime, isCurrentPlayer: self.viewModel.currentPlayer == .black)
 
                 ZStack(alignment: .bottomLeading) {
                     ChessBoardView()
@@ -39,7 +40,7 @@ struct ContentView: View {
                 }
                 .frame(maxHeight: UIScreen.main.bounds.width)
 
-                HUDView(name: "Alicia Conde", time: "1:01.15")
+                HUDView(name: "Alicia Conde", time: viewModel.whiteRemainigTime, isCurrentPlayer: self.viewModel.currentPlayer == .white)
             }
         }.edgesIgnoringSafeArea(.top)
     }

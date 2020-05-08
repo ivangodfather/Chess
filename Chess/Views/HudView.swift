@@ -13,6 +13,8 @@ struct HUDView: View {
 
     let name: String
     let time: String
+    let isCurrentPlayer: Bool
+    @State private var isRotating: Bool = false
 
     var body: some View {
         HStack {
@@ -26,18 +28,20 @@ struct HUDView: View {
             }
 
             .padding()
-            .background(Color.green)
+            .background(Color.green.opacity(0.7))
 
         }
-
         .foregroundColor(.white)
-        .font(Font.headline.weight(.bold))
+        .font(Font.system(.headline, design: .monospaced))
         .background(Color.black.opacity(0.7))
+        .opacity(isCurrentPlayer ? 1 : 0.6)
+        .blur(radius: isCurrentPlayer ? 0 : 0.5)
+
     }
 }
 
 struct HudView_Previews: PreviewProvider {
     static var previews: some View {
-        HUDView(name: "Iván Ruiz", time: "04:03.15")
+        HUDView(name: "Iván Ruiz", time: "04:03.15", isCurrentPlayer: true)
     }
 }

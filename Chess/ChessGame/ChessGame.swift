@@ -13,7 +13,7 @@ typealias Board  = [[Piece?]]
 
 class ChessGame {
 
-    let board: CurrentValueSubject<Board, Never> = CurrentValueSubject(ChessGame.loadInitialBoard())
+    let board: CurrentValueSubject<Board, Never>
     let currentPlayer: CurrentValueSubject<Player, Never> = CurrentValueSubject(.white)
     let currentPlayerIsInCheck: CurrentValueSubject<Bool, Never> = CurrentValueSubject(false)
     let whiteRemainingTime: CurrentValueSubject<TimeInterval, Never>
@@ -22,10 +22,17 @@ class ChessGame {
     var activePieces: [Piece] { board.value.flatMap { $0 }.compactMap { $0 } }
 
     private let pieceMovement = PieceMovement()
+    private var cancellables = Set<AnyCancellable>()
 
-    init(playerTime: TimeInterval = 10 * 60) {
+    init(playerTime: TimeInterval = 10 * 60, board: Board = ChessGame.loadInitialBoard()) {
+        self.board = CurrentValueSubject(board)
         whiteRemainingTime = CurrentValueSubject(playerTime)
         blackRemainingTime = CurrentValueSubject(playerTime)
+        Timer.publish(every: 1.0, on: .main, in: .common)
+            .autoconnect()
+            .sink { date  in
+            (self.currentPlayer.value == .white ? self.whiteRemainingTime : self.blackRemainingTime).value -= 1
+        }.store(in: &cancellables)
     }
 
     func didMove(from startPosition: Position, to finalPosition: Position) {

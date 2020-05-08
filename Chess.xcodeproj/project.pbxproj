@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4203DF9E2465CBB000783EE5 /* ChessBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4203DF9D2465CBB000783EE5 /* ChessBoardView.swift */; };
+		4203DFA02465EF1B00783EE5 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4203DF9F2465EF1B00783EE5 /* TimeInterval.swift */; };
 		42385384246455D0006CD15E /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42385383246455D0006CD15E /* Position.swift */; };
 		4238538624645BC1006CD15E /* CGSize+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4238538524645BC1006CD15E /* CGSize+.swift */; };
 		4238538824646D32006CD15E /* PieceMovement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4238538724646D32006CD15E /* PieceMovement.swift */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		4203DF9D2465CBB000783EE5 /* ChessBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessBoardView.swift; sourceTree = "<group>"; };
+		4203DF9F2465EF1B00783EE5 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		42385383246455D0006CD15E /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		4238538524645BC1006CD15E /* CGSize+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+.swift"; sourceTree = "<group>"; };
 		4238538724646D32006CD15E /* PieceMovement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceMovement.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			children = (
 				4238538524645BC1006CD15E /* CGSize+.swift */,
 				4238538924646F09006CD15E /* Array+.swift */,
+				4203DF9F2465EF1B00783EE5 /* TimeInterval.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42385384246455D0006CD15E /* Position.swift in Sources */,
+				4203DFA02465EF1B00783EE5 /* TimeInterval.swift in Sources */,
 				42EE9BE32462A80600BB9AF4 /* AppDelegate.swift in Sources */,
 				42EE9BE82462A80700BB9AF4 /* Chess.xcdatamodeld in Sources */,
 				4238538E2465AD70006CD15E /* PieceType.swift in Sources */,
