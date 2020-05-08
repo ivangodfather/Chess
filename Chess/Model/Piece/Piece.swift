@@ -12,13 +12,15 @@ import UIKit
 class Piece: Identifiable {
     let uuid = UUID()
 
-    let imageName: String
     let player: Player
+    let type: PieceType
 
-    init(imageName: String, player: Player) {
-        self.imageName = imageName
+    init(type: PieceType, player: Player) {
+        self.type = type
         self.player = player
     }
+
+
 }
 
 extension Piece: Equatable {

@@ -25,11 +25,6 @@ struct ContentView: View {
                     }
                 }
             }
-            .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    print(self.viewModel.positionForPiece(self.viewModel.board[5][1]!))
-                }
-            }
             ForEach(viewModel.pieces) { piece in
                 Image(piece.imageName)
                     .resizable()
@@ -42,7 +37,6 @@ struct ContentView: View {
             }
         }
         .frame(maxHeight: UIScreen.main.bounds.width)
-
     }
     
     private func dragGesture(_ piece: Piece) -> _EndedGesture<_ChangedGesture<DragGesture>> {

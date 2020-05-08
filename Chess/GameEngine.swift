@@ -26,14 +26,13 @@ struct GameEngine {
             return false
         }
 
-        switch piece {
-        case is Pawn: return validPawnMove(board: board, start: start, final: final, player: player)
-        case is Knight: return validKnightMove(start: start, final: final)
-        case is King: return validKingMove(start: start, final: final)
-        case is Rook: return validRookMove(board: board, start: start, final: final)
-        case is Bishop: return validBishopMove(board: board, start: start, final: final)
-        case is Queen: return validBishopMove(board: board, start: start, final: final) || validRookMove(board: board, start: start, final: final)
-        default: fatalError()
+        switch piece.type {
+        case .pawn: return validPawnMove(board: board, start: start, final: final, player: player)
+        case .knight: return validKnightMove(start: start, final: final)
+        case .king: return validKingMove(start: start, final: final)
+        case .rook: return validRookMove(board: board, start: start, final: final)
+        case .bishop: return validBishopMove(board: board, start: start, final: final)
+        case .queen: return validBishopMove(board: board, start: start, final: final) || validRookMove(board: board, start: start, final: final)
         }
     }
 
