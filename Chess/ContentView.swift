@@ -19,28 +19,19 @@ struct ContentView: View {
             Image("pattern")
                 .opacity(0.4)
                 .blur(radius: 1)
-                
+
             
             VStack(spacing: 0) {
                 HUDView(name: "Nakamura, Hikaru", time: "1:01.15")
 
                 ZStack(alignment: .bottomLeading) {
-                    VStack(spacing: 0) {
-                        ForEach((0...7).reversed(), id: \.self) { y in
-                            HStack(spacing: 0) {
-                                ForEach(0...7, id: \.self) { x in
-                                    ((x + y).isMultiple(of: 2) ? Image("b_black") : Image("b_white"))
-                                        .resizable()
-                                }
-                            }
-                        }
-                    }
+                    ChessBoardView()
                     ForEach(viewModel.pieces) { piece in
                         Image(piece.imageName)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .scaleEffect(self.currentPiece.0 == piece ? 1.3 : 1)
-                            .offset(self.currentPiece.0 == piece ? self.currentPiece.1 : self.viewModel.positionForPiece(piece).size)
+                            .offset(self.currentPiece.0 == piece ? self.currentPiece.1 : self.viewModel.indexOf(piece).size)
                             .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)
                             .gesture(self.dragGesture(piece))
                             .animation(.easeInOut(duration: 0.2))
@@ -56,12 +47,13 @@ struct ContentView: View {
     private func dragGesture(_ piece: Piece) -> _EndedGesture<_ChangedGesture<DragGesture>> {
         DragGesture()
             .onChanged { dragValue in
-                self.currentPiece = (piece, self.viewModel.positionForPiece(piece).size + dragValue.translation)
+                self.currentPiece = (piece, self.viewModel.indexOf(piece).size + dragValue.translation)
                 self.viewModel.objectWillChange.send()
         }
         .onEnded {
             self.currentPiece = (nil, .zero)
-            self.viewModel.didMove(piece, offset: Position($0.translation))
+            let finalPosition = self.viewModel.indexOf(piece) + Position($0.translation)
+            self.viewModel.didMove(from: self.viewModel.indexOf(piece), to: finalPosition)
         }
     }
 }
@@ -71,3 +63,5 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+

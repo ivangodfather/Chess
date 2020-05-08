@@ -10,11 +10,11 @@ import Foundation
 
 typealias Board  = [[Piece?]]
 
-struct GameEngine {
+struct PieceMovement {
 
     private let bounds = 0...7
 
-    func isValidMove(board: Board, start: Position, final: Position, player: Player) -> Bool {
+    func isValid(board: Board, start: Position, final: Position, player: Player) -> Bool {
         guard start != final,
             let piece = board[start],
             bounds ~= final.x && bounds ~= final.y,

@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Piece {
+extension ChessGame {
     static func loadInitialBoard() -> Board {
         var board = [[Piece?]](repeating: [Piece?](repeating: nil, count:  8), count: 8)
 

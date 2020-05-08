@@ -8,37 +8,30 @@
 
 import Foundation
 import UIKit
+import Combine
 
 final class GameViewModel: ObservableObject {
 
-    @Published var board: Board
+    @Published var board: Board = []
     @Published var currentPlayer = Player.white
-    var pieces: [Piece] { board.flatMap { $0 }.compactMap { $0 } }
+    var pieces: [Piece] { chessGame.activePieces }
 
-    private let engine: GameEngine
+    private var disposables = Set<AnyCancellable>()
+
+    private let chessGame: ChessGame
 
     init() {
-        engine = GameEngine()
-        board = Piece.loadInitialBoard()
+        chessGame = ChessGame()
+        chessGame.currentPlayer.assign(to: \.currentPlayer, on: self).store(in: &disposables)
+        chessGame.board.assign(to: \.board, on: self).store(in: &disposables)
     }
     
     
-    func didMove(_ piece: Piece, offset: Position) {
-        if engine.isValidMove(board: board, start: positionForPiece(piece), final: positionForPiece(piece) + offset, player: currentPlayer) {
-            let oldPosition = positionForPiece(piece)
-            let newPosition = oldPosition + offset
-            board[newPosition] = piece
-            board[oldPosition] = nil
-            currentPlayer = currentPlayer == .white ? .black : .white
-
-        } 
-        objectWillChange.send()
+    func didMove(from startPosition: Position, to finalPosition: Position) {
+        chessGame.didMove(from: startPosition, to: finalPosition)
     }
 
-    func positionForPiece(_ piece: Piece) -> Position {
-        if let index = board.flatMap({ $0 }).firstIndex (where: { $0 == piece }) {
-            return Position(x: index / 8, y: index % 8)
-        }
-        fatalError()
+    func indexOf(_ piece: Piece) -> Position {
+        chessGame.indexOf(piece)
     }
 }
