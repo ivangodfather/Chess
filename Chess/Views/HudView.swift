@@ -34,8 +34,8 @@ struct HUDView: View {
         .foregroundColor(.white)
         .font(Font.system(.headline, design: .monospaced))
         .background(Color.black.opacity(0.7))
-        .opacity(isCurrentPlayer ? 1 : 0.6)
-        .blur(radius: isCurrentPlayer ? 0 : 0.5)
+        .opacity(isCurrentPlayer ? 1 : 0.7)
+        .blur(radius: isCurrentPlayer ? 0 : 0.4)
 
     }
 }
