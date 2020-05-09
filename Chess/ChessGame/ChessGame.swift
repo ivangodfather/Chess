@@ -21,7 +21,7 @@ class ChessGame {
 
     var activePieces: [Piece] { board.value.flatMap { $0 }.compactMap { $0 } }
 
-    private let pieceMovement = PieceMovement()
+    let pieceMovement = PieceMovement()
     private var cancellables = Set<AnyCancellable>()
     private var isFirstMove = true
 
@@ -74,7 +74,7 @@ class ChessGame {
     }
 }
 
-enum Player {
-    case white
+enum Player: Int {
+    case white = 0
     case black
 }

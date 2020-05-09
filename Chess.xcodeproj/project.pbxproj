@@ -12,6 +12,9 @@
 		4203DFA22466A01B00783EE5 /* GameSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4203DFA12466A01B00783EE5 /* GameSelectorView.swift */; };
 		4203DFA42466A05500783EE5 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4203DFA32466A05500783EE5 /* BackgroundView.swift */; };
 		4203DFA62466A3A200783EE5 /* GameSelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4203DFA52466A3A200783EE5 /* GameSelectorViewModel.swift */; };
+		4203DFEF2467161600783EE5 /* AIEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4203DFEE2467161600783EE5 /* AIEngine.swift */; };
+		4203DFF12467163900783EE5 /* AIPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4203DFF02467163900783EE5 /* AIPlayer.swift */; };
+		4203DFF32467176400783EE5 /* AIMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4203DFF22467176400783EE5 /* AIMove.swift */; };
 		42385384246455D0006CD15E /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42385383246455D0006CD15E /* Position.swift */; };
 		4238538624645BC1006CD15E /* CGSize+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4238538524645BC1006CD15E /* CGSize+.swift */; };
 		4238538824646D32006CD15E /* PieceMovement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4238538724646D32006CD15E /* PieceMovement.swift */; };
@@ -37,6 +40,9 @@
 		4203DFA12466A01B00783EE5 /* GameSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSelectorView.swift; sourceTree = "<group>"; };
 		4203DFA32466A05500783EE5 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		4203DFA52466A3A200783EE5 /* GameSelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSelectorViewModel.swift; sourceTree = "<group>"; };
+		4203DFEE2467161600783EE5 /* AIEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIEngine.swift; sourceTree = "<group>"; };
+		4203DFF02467163900783EE5 /* AIPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIPlayer.swift; sourceTree = "<group>"; };
+		4203DFF22467176400783EE5 /* AIMove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIMove.swift; sourceTree = "<group>"; };
 		42385383246455D0006CD15E /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		4238538524645BC1006CD15E /* CGSize+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+.swift"; sourceTree = "<group>"; };
 		4238538724646D32006CD15E /* PieceMovement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceMovement.swift; sourceTree = "<group>"; };
@@ -69,6 +75,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4203DFED2467160C00783EE5 /* AI */ = {
+			isa = PBXGroup;
+			children = (
+				4203DFEE2467161600783EE5 /* AIEngine.swift */,
+				4203DFF02467163900783EE5 /* AIPlayer.swift */,
+				4203DFF22467176400783EE5 /* AIMove.swift */,
+			);
+			path = AI;
+			sourceTree = "<group>";
+		};
 		4238537C2464531C006CD15E /* Piece */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +146,7 @@
 		42EE9BE12462A80600BB9AF4 /* Chess */ = {
 			isa = PBXGroup;
 			children = (
+				4203DFED2467160C00783EE5 /* AI */,
 				423853962465BEE1006CD15E /* ChessGame */,
 				4238538F2465B37E006CD15E /* Views */,
 				4238538224645571006CD15E /* Extensions */,
@@ -239,13 +256,16 @@
 				4203DFA02465EF1B00783EE5 /* TimeInterval.swift in Sources */,
 				42EE9BE32462A80600BB9AF4 /* AppDelegate.swift in Sources */,
 				42EE9BE82462A80700BB9AF4 /* Chess.xcdatamodeld in Sources */,
+				4203DFEF2467161600783EE5 /* AIEngine.swift in Sources */,
 				4238538E2465AD70006CD15E /* PieceType.swift in Sources */,
 				4203DF9E2465CBB000783EE5 /* ChessBoardView.swift in Sources */,
 				42EE9C0B2462AE7D00BB9AF4 /* GameViewModel.swift in Sources */,
 				4238538C246560BC006CD15E /* ChessGame+Board.swift in Sources */,
+				4203DFF32467176400783EE5 /* AIMove.swift in Sources */,
 				423853952465BD06006CD15E /* ChessGame.swift in Sources */,
 				42EE9BFB2462AB6600BB9AF4 /* Piece.swift in Sources */,
 				4238538824646D32006CD15E /* PieceMovement.swift in Sources */,
+				4203DFF12467163900783EE5 /* AIPlayer.swift in Sources */,
 				4203DFA22466A01B00783EE5 /* GameSelectorView.swift in Sources */,
 				4238538A24646F09006CD15E /* Array+.swift in Sources */,
 				4238538624645BC1006CD15E /* CGSize+.swift in Sources */,
