@@ -23,8 +23,8 @@ final class GameViewModel: ObservableObject {
 
     private let chessGame: ChessGame
 
-    init() {
-        chessGame = ChessGame()
+    init(gameMode: GameMode) {
+        chessGame = ChessGame(gameMode: gameMode)
         chessGame.currentPlayer.assign(to: \.currentPlayer, on: self).store(in: &disposables)
         chessGame.board.assign(to: \.board, on: self).store(in: &disposables)
         chessGame.whiteRemainingTime.map { $0.chessyTime() }.assign(to: \.whiteRemainigTime, on: self).store(in: &disposables)

@@ -23,19 +23,19 @@ class ChessGame {
 
     private let pieceMovement = PieceMovement()
     private var cancellables = Set<AnyCancellable>()
+    private var isFirstMove = true
 
-    init(playerTime: TimeInterval = 10 * 60, board: Board = ChessGame.loadInitialBoard()) {
+    init(gameMode: GameMode, board: Board = ChessGame.loadInitialBoard()) {
         self.board = CurrentValueSubject(board)
-        whiteRemainingTime = CurrentValueSubject(playerTime)
-        blackRemainingTime = CurrentValueSubject(playerTime)
-        Timer.publish(every: 1.0, on: .main, in: .common)
-            .autoconnect()
-            .sink { date  in
-            (self.currentPlayer.value == .white ? self.whiteRemainingTime : self.blackRemainingTime).value -= 1
-        }.store(in: &cancellables)
+        whiteRemainingTime = CurrentValueSubject(Double(gameMode.minuts * 60))
+        blackRemainingTime = CurrentValueSubject(Double(gameMode.minuts * 60))
     }
 
     func didMove(from startPosition: Position, to finalPosition: Position) {
+        if isFirstMove {
+            startClocks()
+            isFirstMove = false
+        }
         if pieceMovement.isValid(board: board.value, start: startPosition, final: finalPosition, player: currentPlayer.value) {
             board.value[finalPosition] = board.value[startPosition]
             board.value[startPosition] = nil
@@ -63,6 +63,14 @@ class ChessGame {
                 }
             }
         }
+    }
+
+    private func startClocks() {
+        Timer.publish(every: 1.0, on: .main, in: .common)
+            .autoconnect()
+            .sink { date  in
+            (self.currentPlayer.value == .white ? self.whiteRemainingTime : self.blackRemainingTime).value -= 1
+        }.store(in: &cancellables)
     }
 }
 

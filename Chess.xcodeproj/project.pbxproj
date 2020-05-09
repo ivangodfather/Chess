@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		4203DF9E2465CBB000783EE5 /* ChessBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4203DF9D2465CBB000783EE5 /* ChessBoardView.swift */; };
 		4203DFA02465EF1B00783EE5 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4203DF9F2465EF1B00783EE5 /* TimeInterval.swift */; };
+		4203DFA22466A01B00783EE5 /* GameSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4203DFA12466A01B00783EE5 /* GameSelectorView.swift */; };
+		4203DFA42466A05500783EE5 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4203DFA32466A05500783EE5 /* BackgroundView.swift */; };
+		4203DFA62466A3A200783EE5 /* GameSelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4203DFA52466A3A200783EE5 /* GameSelectorViewModel.swift */; };
 		42385384246455D0006CD15E /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42385383246455D0006CD15E /* Position.swift */; };
 		4238538624645BC1006CD15E /* CGSize+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4238538524645BC1006CD15E /* CGSize+.swift */; };
 		4238538824646D32006CD15E /* PieceMovement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4238538724646D32006CD15E /* PieceMovement.swift */; };
@@ -20,7 +23,7 @@
 		42EE9BE32462A80600BB9AF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EE9BE22462A80600BB9AF4 /* AppDelegate.swift */; };
 		42EE9BE52462A80600BB9AF4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EE9BE42462A80600BB9AF4 /* SceneDelegate.swift */; };
 		42EE9BE82462A80700BB9AF4 /* Chess.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 42EE9BE62462A80700BB9AF4 /* Chess.xcdatamodeld */; };
-		42EE9BEA2462A80700BB9AF4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EE9BE92462A80700BB9AF4 /* ContentView.swift */; };
+		42EE9BEA2462A80700BB9AF4 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EE9BE92462A80700BB9AF4 /* GameView.swift */; };
 		42EE9BEC2462A80800BB9AF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42EE9BEB2462A80800BB9AF4 /* Assets.xcassets */; };
 		42EE9BEF2462A80800BB9AF4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42EE9BEE2462A80800BB9AF4 /* Preview Assets.xcassets */; };
 		42EE9BF22462A80800BB9AF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42EE9BF02462A80800BB9AF4 /* LaunchScreen.storyboard */; };
@@ -31,6 +34,9 @@
 /* Begin PBXFileReference section */
 		4203DF9D2465CBB000783EE5 /* ChessBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessBoardView.swift; sourceTree = "<group>"; };
 		4203DF9F2465EF1B00783EE5 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
+		4203DFA12466A01B00783EE5 /* GameSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSelectorView.swift; sourceTree = "<group>"; };
+		4203DFA32466A05500783EE5 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		4203DFA52466A3A200783EE5 /* GameSelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSelectorViewModel.swift; sourceTree = "<group>"; };
 		42385383246455D0006CD15E /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		4238538524645BC1006CD15E /* CGSize+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+.swift"; sourceTree = "<group>"; };
 		4238538724646D32006CD15E /* PieceMovement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceMovement.swift; sourceTree = "<group>"; };
@@ -43,7 +49,7 @@
 		42EE9BE22462A80600BB9AF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42EE9BE42462A80600BB9AF4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		42EE9BE72462A80700BB9AF4 /* Chess.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chess.xcdatamodel; sourceTree = "<group>"; };
-		42EE9BE92462A80700BB9AF4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		42EE9BE92462A80700BB9AF4 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		42EE9BEB2462A80800BB9AF4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42EE9BEE2462A80800BB9AF4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		42EE9BF12462A80800BB9AF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -85,8 +91,12 @@
 		4238538F2465B37E006CD15E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				42EE9BE92462A80700BB9AF4 /* GameView.swift */,
 				423853902465B38D006CD15E /* HudView.swift */,
 				4203DF9D2465CBB000783EE5 /* ChessBoardView.swift */,
+				4203DFA12466A01B00783EE5 /* GameSelectorView.swift */,
+				4203DFA52466A3A200783EE5 /* GameSelectorViewModel.swift */,
+				4203DFA32466A05500783EE5 /* BackgroundView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -126,7 +136,6 @@
 				42EE9BF92462AB5A00BB9AF4 /* Model */,
 				42EE9BE22462A80600BB9AF4 /* AppDelegate.swift */,
 				42EE9BE42462A80600BB9AF4 /* SceneDelegate.swift */,
-				42EE9BE92462A80700BB9AF4 /* ContentView.swift */,
 				42EE9C0A2462AE7D00BB9AF4 /* GameViewModel.swift */,
 				42EE9BEB2462A80800BB9AF4 /* Assets.xcassets */,
 				42EE9BF02462A80800BB9AF4 /* LaunchScreen.storyboard */,
@@ -225,6 +234,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4203DFA42466A05500783EE5 /* BackgroundView.swift in Sources */,
 				42385384246455D0006CD15E /* Position.swift in Sources */,
 				4203DFA02465EF1B00783EE5 /* TimeInterval.swift in Sources */,
 				42EE9BE32462A80600BB9AF4 /* AppDelegate.swift in Sources */,
@@ -236,9 +246,11 @@
 				423853952465BD06006CD15E /* ChessGame.swift in Sources */,
 				42EE9BFB2462AB6600BB9AF4 /* Piece.swift in Sources */,
 				4238538824646D32006CD15E /* PieceMovement.swift in Sources */,
+				4203DFA22466A01B00783EE5 /* GameSelectorView.swift in Sources */,
 				4238538A24646F09006CD15E /* Array+.swift in Sources */,
 				4238538624645BC1006CD15E /* CGSize+.swift in Sources */,
-				42EE9BEA2462A80700BB9AF4 /* ContentView.swift in Sources */,
+				4203DFA62466A3A200783EE5 /* GameSelectorViewModel.swift in Sources */,
+				42EE9BEA2462A80700BB9AF4 /* GameView.swift in Sources */,
 				423853912465B38D006CD15E /* HudView.swift in Sources */,
 				42EE9BE52462A80600BB9AF4 /* SceneDelegate.swift in Sources */,
 			);
