@@ -74,8 +74,3 @@ class ChessGame {
         }.store(in: &cancellables)
     }
 }
-
-enum Player: Int {
-    case white = 0
-    case black
-}

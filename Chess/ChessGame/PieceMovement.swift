@@ -46,7 +46,10 @@ struct PieceMovement {
                 return true
             }
             let middle = move.start.y + (.white == player ? 1 : -1)
-            if (move.start.y - move.end.y + (player == .white ? 2 : -2)) == 0 && board[move.end] == nil && board[move.start.x][middle] == nil {
+            if (move.start.y - move.end.y + (player == .white ? 2 : -2)) == 0
+                && board[move.end] == nil
+                && board[move.start.x][middle] == nil
+                && ((player == .white && move.start.y == 1) || (player == .black && move.start.y == 6))   {
                 return true
             }
         }
