@@ -54,8 +54,10 @@ class AIEngine: NSObject, GKGameModel {
             playerPices.forEach { piece in
                 for x in 0...7 {
                     for y in 0...7 {
-                        if chessGame.pieceMovement.isValid(board: board, start: chessGame.indexOf(piece), final: Position(x: x, y: y), player: playerObject.player) {
-                            moves.append(AIMove(start: chessGame.indexOf(piece), final: Position(x: x, y: y)))
+                        let move = Move(start: chessGame.indexOf(piece), end: Position(x: x, y: y))
+                        if chessGame.pieceMovement.isValid(board: board, move: move, player: playerObject.player) {
+                            let move = Move(start: chessGame.indexOf(piece), end: Position(x: x, y: y))
+                            moves.append(AIMove(move: move))
                         }
                     }
                 }
@@ -66,8 +68,8 @@ class AIEngine: NSObject, GKGameModel {
     }
 
     func apply(_ gameModelUpdate: GKGameModelUpdate) {
-        if let move = gameModelUpdate as? AIMove {
-            chessGame.didMove(from: move.start, to: move.final)
+        if let aiMove = gameModelUpdate as? AIMove {
+            chessGame.didMove(move: aiMove.move)
             currentPlayer = chessGame.currentPlayer.value == .white ? AIPlayer.allPlayers[1] : AIPlayer.allPlayers[0]
         }
     }

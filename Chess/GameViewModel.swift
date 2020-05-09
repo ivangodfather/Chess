@@ -10,11 +10,6 @@ import Foundation
 import UIKit
 import Combine
 
-struct Move {
-    let start: Position
-    let end: Position
-}
-
 final class GameViewModel: ObservableObject {
 
     @Published var board: Board = []
@@ -38,12 +33,12 @@ final class GameViewModel: ObservableObject {
     }
     
     
-    func didMove(from startPosition: Position, to finalPosition: Position) {
-        chessGame.didMove(from: startPosition, to: finalPosition)
+    func didMove(move: Move) {
+        chessGame.didMove(move: move)
         if currentPlayer == .black {
             ai.bestMove { move in
                 if let move = move {
-                    self.chessGame.didMove(from: move.start, to: move.end)
+                    self.chessGame.didMove(move: move)
                 }
             }
         }
@@ -51,14 +46,5 @@ final class GameViewModel: ObservableObject {
 
     func indexOf(_ piece: Piece) -> Position {
         chessGame.indexOf(piece)
-    }
-}
-
-extension ChessGame: NSCopying {
-    func copy(with zone: NSZone? = nil) -> Any {
-        let copy = ChessGame(gameMode: GameMode(minuts: 30, increment: 0, mode: .blitz))
-        copy.currentPlayer.value = currentPlayer.value
-        copy.board.value = board.value
-        return copy
     }
 }

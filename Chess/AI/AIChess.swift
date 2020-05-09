@@ -17,7 +17,7 @@ class AIChess {
     init(chessGame: ChessGame) {
         self.chessGame = chessGame
         minMaxStrategist = GKMinmaxStrategist()
-        minMaxStrategist.maxLookAheadDepth = 4
+        minMaxStrategist.maxLookAheadDepth = 3
         minMaxStrategist.randomSource = nil
     }
 
@@ -25,9 +25,9 @@ class AIChess {
         let copy = chessGame.copy() as! ChessGame
         minMaxStrategist.gameModel = AIEngine(chessGame: copy)
         DispatchQueue.global(qos: .background).async {
-            if let move = self.minMaxStrategist.bestMove(for: AIPlayer.allPlayers[1]) as? AIMove {
+            if let aiMove = self.minMaxStrategist.bestMove(for: AIPlayer.allPlayers[1]) as? AIMove {
                 DispatchQueue.main.async {
-                    completion(Move(start: move.start, end: move.final))
+                    completion(aiMove.move)
                 }
             }
         }

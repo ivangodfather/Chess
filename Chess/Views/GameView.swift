@@ -55,7 +55,8 @@ struct GameView: View {
         .onEnded {
             self.currentPiece = (nil, .zero)
             let finalPosition = self.viewModel.indexOf(piece) + Position($0.translation)
-            self.viewModel.didMove(from: self.viewModel.indexOf(piece), to: finalPosition)
+            let move = Move(start: self.viewModel.indexOf(piece), end: finalPosition)
+            self.viewModel.didMove(move: move)
         }
     }
 }

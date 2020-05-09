@@ -11,11 +11,9 @@ import GameplayKit
 class AIMove: NSObject, GKGameModelUpdate {
     var value: Int = 0
 
-    let start: Position
-    let final: Position
+    let move: Move
 
-    init(start: Position, final: Position) {
-        self.start = start
-        self.final = final
+    init(move: Move) {
+        self.move = move
     }
 }

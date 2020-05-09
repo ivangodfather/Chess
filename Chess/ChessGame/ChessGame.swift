@@ -31,14 +31,14 @@ class ChessGame {
         blackRemainingTime = CurrentValueSubject(Double(gameMode.minuts * 60))
     }
 
-    func didMove(from startPosition: Position, to finalPosition: Position) {
+    func didMove(move: Move) {
         if isFirstMove {
             startClocks()
             isFirstMove = false
         }
-        if pieceMovement.isValid(board: board.value, start: startPosition, final: finalPosition, player: currentPlayer.value) {
-            board.value[finalPosition] = board.value[startPosition]
-            board.value[startPosition] = nil
+        if pieceMovement.isValid(board: board.value, move: move, player: currentPlayer.value) {
+            board.value[move.end] = board.value[move.start]
+            board.value[move.start] = nil
             currentPlayer.send(currentPlayer.value == .white ? .black : .white)
             checkCurretPlayerIsInCheck()
         }
@@ -57,7 +57,8 @@ class ChessGame {
         let otherPlayerPieces = activePieces.filter { $0.player == otherPlayer }
         if let king = activePieces.filter ({ $0.player == currentPlayer.value && $0.type == .king }).first {
             for piece in otherPlayerPieces {
-                if pieceMovement.isValid(board: board.value, start: indexOf(piece), final: indexOf(king), player: otherPlayer) {
+                let move = Move(start: indexOf(piece), end: indexOf(king))
+                if pieceMovement.isValid(board: board.value, move: move, player: otherPlayer) {
                     currentPlayerIsInCheck.send(true)
                     return
                 }

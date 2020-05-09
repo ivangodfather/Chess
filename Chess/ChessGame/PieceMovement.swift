@@ -12,74 +12,74 @@ struct PieceMovement {
 
     private let bounds = 0...7
 
-    func isValid(board: Board, start: Position, final: Position, player: Player) -> Bool {
-        guard start != final,
-            let piece = board[start],
-            bounds ~= final.x && bounds ~= final.y,
+    func isValid(board: Board, move: Move, player: Player) -> Bool {
+        guard move.start != move.end,
+            let piece = board[move.start],
+            bounds ~= move.end.x && bounds ~= move.end.y,
             piece.player == player else {
             return false
         }
 
-        if let boardPlayer = board[final]?.player, boardPlayer == player {
+        if let boardPlayer = board[move.end]?.player, boardPlayer == player {
             return false
         }
 
         switch piece.type {
-        case .pawn: return validPawnMove(board: board, start: start, final: final, player: player)
-        case .knight: return validKnightMove(start: start, final: final)
-        case .king: return validKingMove(start: start, final: final)
-        case .rook: return validRookMove(board: board, start: start, final: final)
-        case .bishop: return validBishopMove(board: board, start: start, final: final)
-        case .queen: return validBishopMove(board: board, start: start, final: final) || validRookMove(board: board, start: start, final: final)
+        case .pawn: return validPawnMove(board: board, move: move, player: player)
+        case .knight: return validKnightMove( move: move)
+        case .king: return validKingMove(move: move)
+        case .rook: return validRookMove(board: board, move: move)
+        case .bishop: return validBishopMove(board: board, move: move)
+        case .queen: return validBishopMove(board: board, move: move) || validRookMove(board: board, move: move)
         }
     }
 
-    private func validPawnMove(board: Board, start: Position, final: Position, player: Player) -> Bool {
-        if abs(start.x - final.x)  == 1 {
-            guard let boardplayer = board[final]?.player, boardplayer != player else {
+    private func validPawnMove(board: Board, move: Move, player: Player) -> Bool {
+        if abs(move.start.x - move.end.x)  == 1 {
+            guard let boardplayer = board[move.end]?.player, boardplayer != player else {
                 return false
             }
-            return final.y - start.y + (player == .white ? -1 : 1) == 0
+            return move.end.y - move.start.y + (player == .white ? -1 : 1) == 0
         }
-        if start.x == final.x {
-            if (start.y - final.y + (player == .white ? 1 : -1)) == 0 && board[final] == nil {
+        if move.start.x == move.end.x {
+            if (move.start.y - move.end.y + (player == .white ? 1 : -1)) == 0 && board[move.end] == nil {
                 return true
             }
-            let middle = start.y + (.white == player ? 1 : -1)
-            if (start.y - final.y + (player == .white ? 2 : -2)) == 0 && board[final] == nil && board[start.x][middle] == nil {
+            let middle = move.start.y + (.white == player ? 1 : -1)
+            if (move.start.y - move.end.y + (player == .white ? 2 : -2)) == 0 && board[move.end] == nil && board[move.start.x][middle] == nil {
                 return true
             }
         }
         return false
     }
 
-    private func validKnightMove(start: Position, final: Position) -> Bool {
-       (abs(start.x - final.x) == 1 && abs(start.y - final.y) == 2) || (abs(start.x - final.x) == 2 && abs(start.y - final.y) == 1)
+    private func validKnightMove(move: Move) -> Bool {
+       (abs(move.start.x - move.end.x) == 1 && abs(move.start.y - move.end.y) == 2) || (abs(move.start.x - move.end.x) == 2 && abs(move.start.y - move.end.y) == 1)
     }
 
-    private func validKingMove(start: Position, final: Position) -> Bool {
-        [0, 1].contains(abs(start.x - final.x)) && [0, 1].contains(abs(start.y - final.y))
+    private func validKingMove(move: Move) -> Bool {
+        [0, 1].contains(abs(move.start.x - move.end.x)) && [0, 1].contains(abs(move.start.y - move.end.y))
     }
 
-    private func validRookMove(board: Board, start: Position, final: Position) -> Bool {
-        guard start.x == final.x || start.y == final.y else {
+    private func validRookMove(board: Board, move: Move) -> Bool {
+        guard move.start.x == move.end.x || move.start.y == move.end.y else {
             return false
         }
-        if abs(start.y - final.y) == 1 || abs(start.x - final.x) == 1 {
+        if abs(move.start.y - move.end.y) == 1 || abs(move.start.x - move.end.x) == 1 {
             return true
         }
-        if start.x == final.x {
-            let range = min(start.y, final.y) + 1...max(start.y, final.y) - 1
+        if move.start.x == move.end.x {
+            let range = min(move.start.y, move.end.y) + 1...max(move.start.y, move.end.y) - 1
             for y in range {
-                if board[start.x][y] != nil {
+                if board[move.start.x][y] != nil {
                     return false
                 }
             }
         }
-        if start.y == final.y {
-            let range = min(start.x, final.x) + 1...max(start.x, final.x) - 1
+        if move.start.y == move.end.y {
+            let range = min(move.start.x, move.end.x) + 1...max(move.start.x, move.end.x) - 1
             for x in range {
-                if board[x][start.y] != nil {
+                if board[x][move.start.y] != nil {
                     return false
                 }
             }
@@ -87,23 +87,23 @@ struct PieceMovement {
         return true
     }
 
-    private func validBishopMove(board: Board, start: Position, final: Position) -> Bool {
-        guard abs(start.x - final.x) == abs(start.y - final.y) else {
+    private func validBishopMove(board: Board, move: Move) -> Bool {
+        guard abs(move.start.x - move.end.x) == abs(move.start.y - move.end.y) else {
             return false
         }
-        if abs(start.x - final.x) == 1 { return true }
-        let squaresToCheck = abs(start.x - final.x) - 1
+        if abs(move.start.x - move.end.x) == 1 { return true }
+        let squaresToCheck = abs(move.start.x - move.end.x) - 1
         let rangeX: [Int]
-        if start.x < final.x {
-            rangeX = (start.x + 1...final.x - 1).map { $0 }
+        if move.start.x < move.end.x {
+            rangeX = (move.start.x + 1...move.end.x - 1).map { $0 }
         } else {
-            rangeX = (final.x + 1...start.x - 1).map { $0 }.reversed()
+            rangeX = (move.end.x + 1...move.start.x - 1).map { $0 }.reversed()
         }
         let rangeY: [Int]
-        if start.y < final.y {
-            rangeY = (start.y + 1...final.y - 1).map { $0 }
+        if move.start.y < move.end.y {
+            rangeY = (move.start.y + 1...move.end.y - 1).map { $0 }
         } else {
-            rangeY = (final.y + 1...start.y - 1).map { $0 }.reversed()
+            rangeY = (move.end.y + 1...move.start.y - 1).map { $0 }.reversed()
         }
         for x in 0..<squaresToCheck {
             if board[rangeX[x]][rangeY[x]] != nil {
