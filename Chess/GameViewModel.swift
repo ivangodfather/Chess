@@ -9,7 +9,11 @@
 import Foundation
 import UIKit
 import Combine
-import GameplayKit
+
+struct Move {
+    let start: Position
+    let end: Position
+}
 
 final class GameViewModel: ObservableObject {
 
@@ -17,18 +21,16 @@ final class GameViewModel: ObservableObject {
     @Published var currentPlayer = Player.white
     @Published var whiteRemainigTime: String = ""
     @Published var blackRemainigTime: String = ""
-
     var pieces: [Piece] { chessGame.activePieces }
 
     private var disposables = Set<AnyCancellable>()
     private let chessGame: ChessGame
-    private let minMaxStrategist: GKMinmaxStrategist
+    private let ai: AIChess
+
 
     init(gameMode: GameMode) {
         chessGame = ChessGame(gameMode: gameMode)
-        minMaxStrategist = GKMinmaxStrategist()
-        minMaxStrategist.maxLookAheadDepth = 4
-        minMaxStrategist.randomSource = nil
+        ai = AIChess(chessGame: chessGame)
         chessGame.currentPlayer.assign(to: \.currentPlayer, on: self).store(in: &disposables)
         chessGame.board.assign(to: \.board, on: self).store(in: &disposables)
         chessGame.whiteRemainingTime.map { $0.chessyTime() }.assign(to: \.whiteRemainigTime, on: self).store(in: &disposables)
@@ -39,19 +41,12 @@ final class GameViewModel: ObservableObject {
     func didMove(from startPosition: Position, to finalPosition: Position) {
         chessGame.didMove(from: startPosition, to: finalPosition)
         if currentPlayer == .black {
-            let copy = chessGame.copy() as! ChessGame
-            minMaxStrategist.gameModel = AIEngine(chessGame: copy)
-            DispatchQueue.global(qos: .background).async {
-                if let move = self.minMaxStrategist.bestMove(for: AIPlayer.allPlayers[1]) as? AIMove {
-                    DispatchQueue.main.async {
-                        self.chessGame.didMove(from: move.start, to: move.final)
-                    }
+            ai.bestMove { move in
+                if let move = move {
+                    self.chessGame.didMove(from: move.start, to: move.end)
                 }
             }
-
-
         }
-
     }
 
     func indexOf(_ piece: Piece) -> Position {
