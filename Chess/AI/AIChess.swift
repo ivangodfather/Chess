@@ -18,7 +18,7 @@ class AIChess {
     init(chessGame: ChessGame) {
         self.chessGame = chessGame
         minMaxStrategist = GKMinmaxStrategist()
-        minMaxStrategist.maxLookAheadDepth = 4
+        minMaxStrategist.maxLookAheadDepth = 3
         minMaxStrategist.randomSource = GKRandomDistribution()
     }
 
