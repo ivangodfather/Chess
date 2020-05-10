@@ -13,32 +13,29 @@ typealias Board  = [[Piece?]]
 
 class ChessGame {
 
-    let board: CurrentValueSubject<Board, Never>
+    var board: CurrentValueSubject<Board, Never> = CurrentValueSubject([])
     let currentPlayer: CurrentValueSubject<Player, Never> = CurrentValueSubject(.white)
     let currentPlayerIsInCheck: CurrentValueSubject<Bool, Never> = CurrentValueSubject(false)
     let whiteRemainingTime: CurrentValueSubject<TimeInterval, Never>
     let blackRemainingTime: CurrentValueSubject<TimeInterval, Never>
-
     var activePieces: [Piece] { board.value.flatMap { $0 }.compactMap { $0 } }
 
     let pieceMovement = PieceMovement()
     private var cancellables = Set<AnyCancellable>()
-    private var isFirstMove = true
+    private let gameMode: GameMode
+    private var timer = Timer.publish(every: 1.0, on: .main, in: .common)
 
-    init(gameMode: GameMode, board: Board = ChessGame.loadInitialBoard()) {
-        self.board = CurrentValueSubject(board)
+    init(gameMode: GameMode) {
+        self.gameMode = gameMode
         whiteRemainingTime = CurrentValueSubject(Double(gameMode.minuts * 60))
         blackRemainingTime = CurrentValueSubject(Double(gameMode.minuts * 60))
     }
 
-    func didMove(move: Move) {
-        if isFirstMove {
-            startClocks()
-            isFirstMove = false
-        }
+    func play(move: Move) {
         if pieceMovement.isValid(board: board.value, move: move, player: currentPlayer.value) {
             board.value[move.end] = board.value[move.start]
             board.value[move.start] = nil
+            (currentPlayer.value == .white ? whiteRemainingTime : blackRemainingTime).value += Double(gameMode.increment)
             currentPlayer.send(currentPlayer.value == .white ? .black : .white)
             checkCurretPlayerIsInCheck()
         }
@@ -50,6 +47,17 @@ class ChessGame {
             return Position(x: index / 8, y: index % 8)
         }
         fatalError()
+    }
+
+    func start() {
+        cancellables.removeAll()
+        timer = Timer.publish(every: 1.0, on: .main, in: .common)
+        timer.connect().store(in: &cancellables)
+        board.value = ChessGame.loadInitialBoard()
+        currentPlayer.value = .white
+        whiteRemainingTime.value = Double(gameMode.minuts * 60)
+        blackRemainingTime.value = Double(gameMode.minuts * 60)
+        startClocks()
     }
 
     private func checkCurretPlayerIsInCheck() {
@@ -67,9 +75,7 @@ class ChessGame {
     }
 
     private func startClocks() {
-        Timer.publish(every: 1.0, on: .main, in: .common)
-            .autoconnect()
-            .sink { date  in
+        timer.sink { date  in
             (self.currentPlayer.value == .white ? self.whiteRemainingTime : self.blackRemainingTime).value -= 1
         }.store(in: &cancellables)
     }

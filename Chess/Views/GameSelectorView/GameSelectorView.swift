@@ -35,7 +35,8 @@ struct GameSelectorView: View {
             }
             .padding(.top, 32)
             .navigationBarTitle("Chess")
-        }
+        }.accentColor(.primary)
+
     }
 }
 

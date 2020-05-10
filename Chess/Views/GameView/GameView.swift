@@ -24,7 +24,7 @@ struct GameView: View {
             BackgroundView()
             
             VStack(spacing: 0) {
-                HUDView(name: "Nakamura, Hikaru", time: viewModel.blackRemainigTime, isCurrentPlayer: self.viewModel.currentPlayer == .black)
+                HUDView(name: viewModel.blackPlayerName, time: viewModel.blackRemainigTime, isCurrentPlayer: viewModel.currentPlayer == .black)
 
                 ZStack(alignment: .bottomLeading) {
                     ChessBoardView()
@@ -41,9 +41,13 @@ struct GameView: View {
                 }
                 .frame(maxHeight: UIScreen.main.bounds.width)
 
-                HUDView(name: "Alicia Conde", time: viewModel.whiteRemainigTime, isCurrentPlayer: self.viewModel.currentPlayer == .white)
+                HUDView(name: viewModel.whitePlayerName, time: viewModel.whiteRemainigTime, isCurrentPlayer: viewModel.currentPlayer == .white)
             }
-        }.edgesIgnoringSafeArea(.top)
+        }
+        .edgesIgnoringSafeArea(.top)
+        .onAppear {
+            self.viewModel.start()
+        }
     }
     
     private func dragGesture(_ piece: Piece) -> _EndedGesture<_ChangedGesture<DragGesture>> {

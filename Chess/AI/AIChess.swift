@@ -13,6 +13,7 @@ class AIChess {
 
     private let chessGame: ChessGame
     private let minMaxStrategist: GKMinmaxStrategist
+    var isThinking = false
 
     init(chessGame: ChessGame) {
         self.chessGame = chessGame
@@ -22,11 +23,13 @@ class AIChess {
     }
 
     func bestMove(completion: @escaping (Move?) -> ())  {
+        isThinking = true
         let copy = chessGame.copy() as! ChessGame
         minMaxStrategist.gameModel = AIEngine(chessGame: copy)
         DispatchQueue.global(qos: .background).async {
             if let aiMove = self.minMaxStrategist.bestMove(for: AIPlayer.allPlayers[1]) as? AIMove {
                 DispatchQueue.main.async {
+                    self.isThinking = false
                     completion(aiMove.move)
                 }
             }

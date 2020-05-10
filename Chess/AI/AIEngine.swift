@@ -65,7 +65,7 @@ class AIEngine: NSObject, GKGameModel {
 
     func apply(_ gameModelUpdate: GKGameModelUpdate) {
         if let aiMove = gameModelUpdate as? AIMove {
-            chessGame.didMove(move: aiMove.move)
+            chessGame.play(move: aiMove.move)
 //            currentPlayer = chessGame.pa currentPlayer.opponent
         }
     }
