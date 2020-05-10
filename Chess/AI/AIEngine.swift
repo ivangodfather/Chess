@@ -76,8 +76,9 @@ class AIEngine: NSObject, GKGameModel {
 
     func score(for player: GKGameModelPlayer) -> Int {
         if let player = player as? AIPlayer {
-            let selfPieces = chessGame.activePieces.filter { $0.player == player.player }.count
-            let otherPieces = chessGame.activePieces.filter { $0.player != player.player }.count
+
+            let selfPieces = chessGame.activePieces.filter { $0.player == player.player }.map { $0.type.value }.reduce(0,+)
+            let otherPieces = chessGame.activePieces.filter { $0.player != player.player }.map { $0.type.value }.reduce(0,+)
             return selfPieces - otherPieces
         }
         return 0

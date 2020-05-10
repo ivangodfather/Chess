@@ -17,8 +17,8 @@ class AIChess {
     init(chessGame: ChessGame) {
         self.chessGame = chessGame
         minMaxStrategist = GKMinmaxStrategist()
-        minMaxStrategist.maxLookAheadDepth = 3
-        minMaxStrategist.randomSource = nil
+        minMaxStrategist.maxLookAheadDepth = 4
+        minMaxStrategist.randomSource = GKRandomDistribution()
     }
 
     func bestMove(completion: @escaping (Move?) -> ())  {
