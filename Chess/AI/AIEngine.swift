@@ -11,9 +11,7 @@ import GameplayKit
 
 class AIEngine: NSObject, GKGameModel {
 
-    var board = [[Piece?]]()
-    var currentPlayer = AIPlayer.allPlayers[0]
-    let chessGame: ChessGame
+    var chessGame: ChessGame
 
     var players: [GKGameModelPlayer]? {
         return AIPlayer.allPlayers
@@ -24,21 +22,19 @@ class AIEngine: NSObject, GKGameModel {
     }
 
     func copy(with zone: NSZone? = nil) -> Any {
-        let copy = AIEngine(chessGame: chessGame)
+        let copy = AIEngine(chessGame: chessGame.copy() as! ChessGame)
         copy.setGameModel(self)
         return copy
     }
 
     init(chessGame: ChessGame) {
         self.chessGame = chessGame
-        self.board = chessGame.board.value
-        self.currentPlayer = chessGame.currentPlayer.value == .white ? AIPlayer.allPlayers[0] : AIPlayer.allPlayers[1]
     }
 
     func setGameModel(_ gameModel: GKGameModel) {
         if let engine = gameModel as? AIEngine {
-            board = engine.board
-            currentPlayer = engine.currentPlayer
+            chessGame.board.value = engine.chessGame.board.value
+            chessGame.currentPlayer.value = engine.chessGame.currentPlayer.value
         }
     }
 
@@ -55,7 +51,7 @@ class AIEngine: NSObject, GKGameModel {
                 for x in 0...7 {
                     for y in 0...7 {
                         let move = Move(start: chessGame.indexOf(piece), end: Position(x: x, y: y))
-                        if chessGame.pieceMovement.isValid(board: board, move: move, player: playerObject.player) {
+                        if chessGame.pieceMovement.isValid(board: chessGame.board.value, move: move, player: playerObject.player) {
                             let move = Move(start: chessGame.indexOf(piece), end: Position(x: x, y: y))
                             moves.append(AIMove(move: move))
                         }
@@ -70,7 +66,7 @@ class AIEngine: NSObject, GKGameModel {
     func apply(_ gameModelUpdate: GKGameModelUpdate) {
         if let aiMove = gameModelUpdate as? AIMove {
             chessGame.didMove(move: aiMove.move)
-            currentPlayer = chessGame.currentPlayer.value == .white ? AIPlayer.allPlayers[1] : AIPlayer.allPlayers[0]
+//            currentPlayer = chessGame.pa currentPlayer.opponent
         }
     }
 
