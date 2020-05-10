@@ -19,6 +19,8 @@
 		4203DFF724673B8200783EE5 /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4203DFF624673B8200783EE5 /* Move.swift */; };
 		4203DFF924673BB400783EE5 /* ChessGame+Copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4203DFF824673BB400783EE5 /* ChessGame+Copy.swift */; };
 		4203DFFB24673FC700783EE5 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4203DFFA24673FC700783EE5 /* Player.swift */; };
+		4203DFFD24683B2800783EE5 /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4203DFFC24683B2800783EE5 /* GameMode.swift */; };
+		4203E0002468443900783EE5 /* GameModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4203DFFF2468443900783EE5 /* GameModeView.swift */; };
 		42385384246455D0006CD15E /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42385383246455D0006CD15E /* Position.swift */; };
 		4238538624645BC1006CD15E /* CGSize+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4238538524645BC1006CD15E /* CGSize+.swift */; };
 		4238538824646D32006CD15E /* PieceMovement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4238538724646D32006CD15E /* PieceMovement.swift */; };
@@ -51,6 +53,8 @@
 		4203DFF624673B8200783EE5 /* Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
 		4203DFF824673BB400783EE5 /* ChessGame+Copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChessGame+Copy.swift"; sourceTree = "<group>"; };
 		4203DFFA24673FC700783EE5 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		4203DFFC24683B2800783EE5 /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
+		4203DFFF2468443900783EE5 /* GameModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModeView.swift; sourceTree = "<group>"; };
 		42385383246455D0006CD15E /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		4238538524645BC1006CD15E /* CGSize+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+.swift"; sourceTree = "<group>"; };
 		4238538724646D32006CD15E /* PieceMovement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceMovement.swift; sourceTree = "<group>"; };
@@ -94,6 +98,27 @@
 			path = AI;
 			sourceTree = "<group>";
 		};
+		4203DFFE2468441A00783EE5 /* GameSelectorView */ = {
+			isa = PBXGroup;
+			children = (
+				4203DFA12466A01B00783EE5 /* GameSelectorView.swift */,
+				4203DFA52466A3A200783EE5 /* GameSelectorViewModel.swift */,
+				4203DFFF2468443900783EE5 /* GameModeView.swift */,
+			);
+			path = GameSelectorView;
+			sourceTree = "<group>";
+		};
+		4203E0012468447C00783EE5 /* GameView */ = {
+			isa = PBXGroup;
+			children = (
+				42EE9BE92462A80700BB9AF4 /* GameView.swift */,
+				423853902465B38D006CD15E /* HudView.swift */,
+				4203DF9D2465CBB000783EE5 /* ChessBoardView.swift */,
+				4203DFA32466A05500783EE5 /* BackgroundView.swift */,
+			);
+			path = GameView;
+			sourceTree = "<group>";
+		};
 		4238537C2464531C006CD15E /* Piece */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,12 +141,8 @@
 		4238538F2465B37E006CD15E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				42EE9BE92462A80700BB9AF4 /* GameView.swift */,
-				423853902465B38D006CD15E /* HudView.swift */,
-				4203DF9D2465CBB000783EE5 /* ChessBoardView.swift */,
-				4203DFA12466A01B00783EE5 /* GameSelectorView.swift */,
-				4203DFA52466A3A200783EE5 /* GameSelectorViewModel.swift */,
-				4203DFA32466A05500783EE5 /* BackgroundView.swift */,
+				4203DFFE2468441A00783EE5 /* GameSelectorView */,
+				4203E0012468447C00783EE5 /* GameView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -185,9 +206,10 @@
 		42EE9BF92462AB5A00BB9AF4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4203DFF624673B8200783EE5 /* Move.swift */,
 				42385383246455D0006CD15E /* Position.swift */,
 				4238537C2464531C006CD15E /* Piece */,
-				4203DFF624673B8200783EE5 /* Move.swift */,
+				4203DFFC24683B2800783EE5 /* GameMode.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -277,6 +299,8 @@
 				4203DFF32467176400783EE5 /* AIMove.swift in Sources */,
 				423853952465BD06006CD15E /* ChessGame.swift in Sources */,
 				42EE9BFB2462AB6600BB9AF4 /* Piece.swift in Sources */,
+				4203DFFD24683B2800783EE5 /* GameMode.swift in Sources */,
+				4203E0002468443900783EE5 /* GameModeView.swift in Sources */,
 				4238538824646D32006CD15E /* PieceMovement.swift in Sources */,
 				4203DFF12467163900783EE5 /* AIPlayer.swift in Sources */,
 				4203DFA22466A01B00783EE5 /* GameSelectorView.swift in Sources */,

@@ -63,7 +63,7 @@ struct GameView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView(gameMode: GameMode(minuts: 1, increment: 0, mode: .bullet))
+        GameView(gameMode: GameMode(minuts: 1, increment: 0, mode: .computer))
     }
 }
 

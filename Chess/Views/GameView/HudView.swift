@@ -19,7 +19,7 @@ struct HUDView: View {
     var body: some View {
         HStack {
             Text(name)
-                .fontWeight(.bold)
+                .fontWeight(.medium)
                 .padding(.horizontal)
             Spacer()
             HStack {
@@ -33,7 +33,7 @@ struct HUDView: View {
         }
         .foregroundColor(.white)
         .font(Font.system(.headline, design: .monospaced))
-        .background(Color.black.opacity(0.7))
+        .background(Color.secondary)
         .opacity(isCurrentPlayer ? 1 : 0.7)
         .blur(radius: isCurrentPlayer ? 0 : 0.4)
 

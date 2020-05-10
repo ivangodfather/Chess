@@ -11,7 +11,7 @@ import SwiftUI
 struct BackgroundView: View {
     var body: some View {
         Image("pattern")
-            .opacity(0.8)
+            .opacity(0.05)
             .blur(radius: 1)
     }
 }
