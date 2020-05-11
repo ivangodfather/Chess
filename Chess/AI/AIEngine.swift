@@ -48,17 +48,12 @@ class AIEngine: NSObject, GKGameModel {
 
             let playerPices = chessGame.activePieces.filter { $0.player == playerObject.player }
             playerPices.forEach { piece in
-                for x in 0...7 {
-                    for y in 0...7 {
-                        let move = Move(start: chessGame.indexOf(piece), end: Position(x: x, y: y))
-                        if chessGame.pieceMovement.isValid(board: chessGame.board.value, move: move, player: playerObject.player) {
-                            let move = Move(start: chessGame.indexOf(piece), end: Position(x: x, y: y))
-                            moves.append(AIMove(move: move))
-                        }
-                    }
-                }
+                let newMoves = chessGame.pieceMovement
+                    .validMovementsFor(position: chessGame.indexOf(piece), with: piece, withBoard: chessGame.board.value)
+                    .map { AIMove(move: $0) }
+                moves.append(contentsOf: newMoves)
             }
-            return moves
+            return moves.shuffled()
         }
         return nil
     }
@@ -76,7 +71,6 @@ class AIEngine: NSObject, GKGameModel {
 
     func score(for player: GKGameModelPlayer) -> Int {
         if let player = player as? AIPlayer {
-
             let selfPieces = chessGame.activePieces.filter { $0.player == player.player }.map { $0.type.value }.reduce(0,+)
             let otherPieces = chessGame.activePieces.filter { $0.player != player.player }.map { $0.type.value }.reduce(0,+)
             return selfPieces - otherPieces

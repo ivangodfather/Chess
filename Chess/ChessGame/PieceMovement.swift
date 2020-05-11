@@ -10,7 +10,7 @@ import Foundation
 
 struct PieceMovement {
 
-    private let bounds = 0...7
+    let bounds = 0...7
 
     func isValid(board: Board, move: Move, player: Player) -> Bool {
         guard move.start != move.end,
