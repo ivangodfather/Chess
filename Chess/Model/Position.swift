@@ -7,24 +7,9 @@
 //
 
 import Foundation
-import UIKit
 
 struct Position {
     let x, y: Int
-
-    init(_ translation: CGSize) {
-        x = Int((translation.width / (UIScreen.main.bounds.width / 8)).rounded())
-        y = Int((translation.height / (UIScreen.main.bounds.width / 8)).rounded())
-    }
-
-    init(x: Int, y: Int) {
-        self.x = x
-        self.y = y
-    }
-
-    var size: CGSize {
-        CGSize(width: CGFloat(x) * UIScreen.main.bounds.width / 8, height: -CGFloat(y) * UIScreen.main.bounds.width / 8)
-    }
 }
 
 func +(lhs: Position, rhs: Position) -> Position {

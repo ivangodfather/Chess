@@ -22,3 +22,9 @@ struct ChessBoardView: View {
         }
     }
 }
+
+struct ChessBoardView_Previews: PreviewProvider {
+    static var previews: some View {
+        ChessBoardView()
+    }
+}

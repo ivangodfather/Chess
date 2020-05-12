@@ -11,7 +11,7 @@ import GameplayKit
 
 class AIEngine: NSObject, GKGameModel {
 
-    var chessGame: ChessGame
+    let chessGame: ChessGame
 
     var players: [GKGameModelPlayer]? {
         return AIPlayer.allPlayers
@@ -40,7 +40,6 @@ class AIEngine: NSObject, GKGameModel {
 
     func gameModelUpdates(for player: GKGameModelPlayer) -> [GKGameModelUpdate]? {
         if let playerObject = player as? AIPlayer {
-            // 2
             if isWin(for: playerObject) || isWin(for: playerObject.opponent) {
                 return nil
             }
@@ -61,7 +60,6 @@ class AIEngine: NSObject, GKGameModel {
     func apply(_ gameModelUpdate: GKGameModelUpdate) {
         if let aiMove = gameModelUpdate as? AIMove {
             chessGame.play(move: aiMove.move)
-//            currentPlayer = chessGame.pa currentPlayer.opponent
         }
     }
 
