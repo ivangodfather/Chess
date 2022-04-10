@@ -15,7 +15,7 @@ extension PieceMovement {
         case .knight:
             return validMovementsForKnight(from: position, piece: piece, andBoard: board)
         case .king:
-            return validMovementsForKnight(from: position, piece: piece, andBoard: board)
+            return validMovementsForKing(from: position, piece: piece, andBoard: board)
         case .rook:
             return validMovementsForRook(from: position, piece: piece, andBoard: board)
         case .bishop:
